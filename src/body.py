@@ -12,9 +12,9 @@ from .model import bodypose_model
 
 
 class Body(object):
-    def __init__(self, model_path):
+    def __init__(self, model_path, use_cuda=True):
         self.model = bodypose_model()
-        if torch.cuda.is_available():
+        if torch.cuda.is_available() and use_cuda:
             self.model = self.model.cuda()
         model_dict = transfer(self.model, torch.load(model_path))
         self.model.load_state_dict(model_dict)
