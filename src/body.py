@@ -1,15 +1,13 @@
+import math
+
 import cv2
 import numpy as np
-import math
-import time
-from scipy.ndimage.filters import gaussian_filter
-import matplotlib.pyplot as plt
-import matplotlib
 import torch
-from torchvision import transforms
+from scipy.ndimage.filters import gaussian_filter
 
-from src import util
-from src.model import bodypose_model
+from ..src import util
+from ..src.model import bodypose_model
+
 
 class Body(object):
     def __init__(self, model_path):
@@ -207,12 +205,13 @@ class Body(object):
         # candidate: x, y, score, id
         return candidate, subset
 
-if __name__ == "__main__":
-    body_estimation = Body('../model/body_pose_model.pth')
 
-    test_image = '../images/ski.jpg'
-    oriImg = cv2.imread(test_image)  # B,G,R order
-    candidate, subset = body_estimation(oriImg)
-    canvas = util.draw_bodypose(oriImg, candidate, subset)
-    plt.imshow(canvas[:, :, [2, 1, 0]])
-    plt.show()
+# if __name__ == "__main__":
+#     body_estimation = Body('../model/body_pose_model.pth')
+#
+#     test_image = '../images/ski.jpg'
+#     oriImg = cv2.imread(test_image)  # B,G,R order
+#     candidate, subset = body_estimation(oriImg)
+#     canvas = util.draw_bodypose(oriImg, candidate, subset)
+#     plt.imshow(canvas[:, :, [2, 1, 0]])
+#     plt.show()
